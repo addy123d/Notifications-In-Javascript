@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notification Using JS</title>
+</head>
+<body>
+    <button onclick="triggerNotification()">Click to Notify !</button>
+</body>
+<script>
+    function triggerNotification() {
+  // Check Browser Support
+  if (!("Notification" in window)) {
+    alert("This browser does not support desktop notification");
+  }
+
+  // Let's check whether notification permissions have already been granted
+  else if (Notification.permission === "granted") {
+    // If it's okay let's create a notification
+    var notification = new Notification("Follow @crashy_code !");
+  }
+
+  // Otherwise, Ask user for permission
+  else if (Notification.permission !== "denied") {
+    Notification.requestPermission().then(function (permission) {
+      // If the user accepts, notify user
+      if (permission === "granted") {
+        var notification = new Notification("Follow @crashy_code !");
+      }
+    });
+  }
+
+}
+</script>
+</html>
